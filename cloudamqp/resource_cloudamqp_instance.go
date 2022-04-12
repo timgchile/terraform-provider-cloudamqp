@@ -179,7 +179,7 @@ func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	data, err := api.ReadInstance(d.Id())
 
 	if err != nil {
-	    if strings.Index(err, "404") > 0 {
+	    if strings.Index(err.Error(), "404") > 0 {
 	        log.Printf("[INFO] ===========> SENDING: %s", d.Id())
 	        return resourceCreate(d, meta)
 	    }
