@@ -2,8 +2,10 @@ package cloudamqp
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/84codes/go-api/api"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/customdiff"
@@ -173,9 +175,14 @@ func resourceCreate(d *schema.ResourceData, meta interface{}) error {
 
 func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	api := meta.(*api.API)
+    log.Printf("[WARN] ===========> ID: %s", d.Id())
 	data, err := api.ReadInstance(d.Id())
 
 	if err != nil {
+	    if strings.Index(err, "404") {
+	        log.Printf("[INFO] ===========> SENDING: %s", d.Id())
+	        return resourceCreate(d, meta)
+	    }
 		return err
 	}
 
