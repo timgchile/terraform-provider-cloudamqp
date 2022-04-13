@@ -126,6 +126,9 @@ func resourceInstance() *schema.Resource {
 				newPlanType, _ := getPlanType(new.(string))
 				return !(oldPlanType == newPlanType)
 			}),
+			customdiff.ForceNewIfChange("tags", func(old, new, meta interface{}) bool {
+                return slices.IndexFunc(new, func(c string) bool { return c == "recreate" })
+            }),
 		),
 	}
 }
@@ -185,7 +188,7 @@ func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	        res2B, _ := json.Marshal(d)
 
             log.Printf("[INFO] ===========> OBJ: %s", string(res2B))
-            d.Set("tags", []string{"aaa", "bbb"})
+            d.Set("tags", []string{"recreate"})
             return nil
 	        // data := make(map[string]interface{})
 	    } else {
