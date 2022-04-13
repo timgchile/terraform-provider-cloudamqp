@@ -15,12 +15,12 @@ import (
 
 func resourceInstance() *schema.Resource {
 	return &schema.Resource{
-		CreateContext: resourceCreate,
-		ReadContext:   resourceRead,
-		UpdateContext: resourceUpdate,
-		DeleteContext: resourceDelete,
+		Create: resourceCreate,
+		Read:   resourceRead,
+		Update: resourceUpdate,
+		Delete: resourceDelete,
 		Importer: &schema.ResourceImporter{
-			StateContext: schema.ImportStatePassthroughContext,
+			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -181,6 +181,7 @@ func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	if err != nil {
 	    if strings.Index(err.Error(), "404") > 0 {
 	        log.Printf("[INFO] ===========> SENDING: %s", d.Id())
+            d.Set("tags", []string{"aaa", "bbb"})
 	        // data := make(map[string]interface{})
 	    } else {
 	        return err
