@@ -8,7 +8,6 @@ import (
 	"strconv"
 	"strings"
 
-    "golang.org/x/exp/slices"
 	"github.com/84codes/go-api/api"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/customdiff"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -128,7 +127,13 @@ func resourceInstance() *schema.Resource {
 				return !(oldPlanType == newPlanType)
 			}),
 			customdiff.ForceNewIfChange("tags", func(old, new, meta interface{}) bool {
-                return slices.IndexFunc(new, func(c string) bool { return c == "recreate" })
+			    var exists = false
+                for i := range new {
+                	if new[i] == "recreate" {
+                		exists = true
+                	}
+                }
+                return exists
             }),
 		),
 	}
