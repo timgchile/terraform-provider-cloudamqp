@@ -2,6 +2,7 @@ package cloudamqp
 
 import (
 	"fmt"
+	"encoding/json"
 	"log"
 	"regexp"
 	"strconv"
