@@ -182,6 +182,7 @@ func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	    if strings.Index(err.Error(), "404") > 0 {
 	        log.Printf("[INFO] ===========> SENDING: %s", d.Id())
             d.Set("tags", []string{"aaa", "bbb"})
+            return nil
 	        // data := make(map[string]interface{})
 	    } else {
 	        return err
