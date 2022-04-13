@@ -132,7 +132,7 @@ func resourceInstance() *schema.Resource {
                 s := reflect.ValueOf(new)
 
                 for i := 0; i < s.Len(); i++ {
-                    if s.Index(i) == "recreate" {
+                    if s.Index(i).(string) == "recreate" {
                         exists = true
                     }
                 }
