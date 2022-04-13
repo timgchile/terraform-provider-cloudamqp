@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"reflect"
 
 	"github.com/84codes/go-api/api"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/customdiff"
