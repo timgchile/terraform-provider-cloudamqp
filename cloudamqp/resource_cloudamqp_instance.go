@@ -130,9 +130,10 @@ func resourceInstance() *schema.Resource {
 			customdiff.ForceNewIfChange("tags", func(old, new, meta interface{}) bool {
                 var exists = false
                 s := reflect.ValueOf(new)
-
+                log.Printf("[INFO] ===========> VALIDATE: %s", "Yes")
                 for i := 0; i < s.Len(); i++ {
                     if s.Field(i).Interface().(string) == "recreate" {
+                        log.Printf("[INFO] ===========> VALUE: %s", s.Field(i).Interface().(string))
                         exists = true
                     }
                 }
