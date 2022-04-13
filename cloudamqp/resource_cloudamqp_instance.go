@@ -132,6 +132,8 @@ func resourceInstance() *schema.Resource {
                 s := reflect.ValueOf(new)
                 log.Printf("[INFO] ===========> VALIDATE: %s", "Yes")
                 for i := 0; i < s.Len(); i++ {
+                    log.Printf("[INFO] ===========> THIS1: %s", s.Index(i).Interface().(string))
+                    log.Printf("[INFO] ===========> THIS2: %s", s.Field(i).Interface().(string))
                     if s.Index(i).Interface().(string) == "recreate" {
                         log.Printf("[INFO] ===========> VALUE: %s", s.Index(i).Interface().(string))
                         exists = true
