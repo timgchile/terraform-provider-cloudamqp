@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+    "golang.org/x/exp/slices"
 	"github.com/84codes/go-api/api"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/customdiff"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
