@@ -2,6 +2,7 @@ package cloudamqp
 
 import (
 	"fmt"
+	"json"
 	"log"
 	"regexp"
 	"strconv"
@@ -181,6 +182,9 @@ func resourceRead(d *schema.ResourceData, meta interface{}) error {
 	if err != nil {
 	    if strings.Index(err.Error(), "404") > 0 {
 	        log.Printf("[INFO] ===========> SENDING: %s", d.Id())
+	        res2B, _ := json.Marshal(d)
+            fmt.Println(string(res2B))
+
             d.Set("tags", []string{"aaa", "bbb"})
             return nil
 	        // data := make(map[string]interface{})
