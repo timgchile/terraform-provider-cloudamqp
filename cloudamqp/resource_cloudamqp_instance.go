@@ -134,10 +134,10 @@ func resourceInstance() *schema.Resource {
                 log.Printf("[INFO] ===========> VALIDATE: %s", "Yes")
                 log.Printf("[INFO] ===========> LEN NEW: %s", s.Len())
                 log.Printf("[INFO] ===========> LEN OLD: %s", t.Len())
-                for i := 0; i < s.Len(); i++ {
-                    log.Printf("[INFO] ===========> THIS1: %s", s.Index(i).Interface().(string))
-                    if s.Index(i).Interface().(string) == "recreate" {
-                        log.Printf("[INFO] ===========> VALUE: %s", s.Index(i).Interface().(string))
+                for i := 0; i < t.Len(); i++ {
+                    log.Printf("[INFO] ===========> THIS1: %s", t.Index(i).Interface().(string))
+                    if t.Index(i).Interface().(string) == "recreate" {
+                        log.Printf("[INFO] ===========> VALUE: %s", t.Index(i).Interface().(string))
                         exists = true
                     }
                 }
