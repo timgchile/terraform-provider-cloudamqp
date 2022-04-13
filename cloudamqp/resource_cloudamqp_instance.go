@@ -127,12 +127,15 @@ func resourceInstance() *schema.Resource {
 				return !(oldPlanType == newPlanType)
 			}),
 			customdiff.ForceNewIfChange("tags", func(old, new, meta interface{}) bool {
-			    var exists = false
-                for i := range new {
-                	if new[i] == "recreate" {
-                		exists = true
-                	}
+                var exists = false
+                s := reflect.ValueOf(new)
+
+                for i := 0; i < s.Len(); i++ {
+                    if s.Index(i) == "recreate" {
+                        exists = true
+                    }
                 }
+
                 return exists
             }),
 		),
